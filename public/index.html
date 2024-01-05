@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Registration</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+    <main>
+        <div class="title">
+            <h1>Registration Form</h1>
+        </div>
+        <form action="/register" method="post">
+            <div class="name">
+                <label for="name">Username:</label>
+                <input type="text" name="name" id="name" required="true" autocomplete="off"
+                    placeholder="Enter Your Username">
+            </div>
+            <div class="email">
+                <label for="email">Email:</label>
+                <input type="email" name="email" id="email" required="true" autocomplete="off"
+                    placeholder="Enter Your Email">
+            </div>
+            <div class="phone">
+                <label for="phone">Phone.No:</label>
+                <input type="tel" name="phone" id="phone" required="true" autocomplete="off"
+                    placeholder="Enter Your Phone number">
+            </div>
+            <div class="password">
+                <label for="password">Password:</label>
+                <input type="password" name="password" id="password" required="true" autocomplete="off"
+                    placeholder="Enter Your Password">
+            </div>
+            <div class="cpassword">
+                <label for="cpassword">Confirm Password:</label>
+                <input type="password" name="cpassword" id="cpassword" required="true" autocomplete="off"
+                    placeholder="Confirm Your Password">
+            </div>
+            <div class="submit">
+                <input type="submit" value="Submit">
+            </div>
+        </form>
+    </main>
+</body>
+<script>
+    let form = document.querySelector('form');
+    //console.log(form);
+    form.addEventListener('submit', async (event) => {
+        event.preventDefault();
+        let formdata = new FormData(form);
+        let data = {};
+        for (let [key, value] of formdata.entries()) {
+            data[key] = value;
+        }
+        //console.log(formdata);
+        const response=await fetch('http://localhost:5000/register', {
+            method:'POST',
+            headers:{
+                'Content-Type':'application/json'
+            },
+            body:JSON.stringify(data)
+
+        });
+        const json=await response.json();
+        if (json.success) {
+            alert('user created');
+            //console.log(data);
+            localStorage.setItem('name',data.name);
+            window.location.href = '/welcome';            
+        } else {
+            //console.log(json.errors);
+
+            alert(json.errors[0].msg);
+         }
+
+    });
+</script>
+
+</html>

@@ -1,0 +1,22 @@
+*{
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+}
+body{
+    background: linear-gradient(to right,rgba(0, 255, 255, 0.623) 20%,rgba(0, 0, 255, 0.61));
+    height: 100vh;
+}
+header{
+    display: flex;
+    background: linear-gradient(to left,#74ebd5,#9face6);
+    box-shadow: 0 2.8px 2.2px rgba(0,0,0,0.034),0 6.7px 5.3px rgba(0,0,0,0.048);
+    padding: 20px;
+    
+}
+div{
+    color: white;
+    margin-left: 10px;
+    font-size:25px;
+    font-family: sans-serif;
+}
